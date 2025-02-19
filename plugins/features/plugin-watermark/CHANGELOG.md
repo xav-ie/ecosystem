@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.78](https://github.com/vuepress/ecosystem/compare/v2.0.0-rc.77...v2.0.0-rc.78) (2025-02-17)
+
+**Note:** Version bump only for package @vuepress/plugin-watermark
+
+# [2.0.0-rc.77](https://github.com/vuepress/ecosystem/compare/v2.0.0-rc.76...v2.0.0-rc.77) (2025-02-16)
+
+**Note:** Version bump only for package @vuepress/plugin-watermark
+
+# [2.0.0-rc.74](https://github.com/vuepress/ecosystem/compare/v2.0.0-rc.73...v2.0.0-rc.74) (2025-01-24)
+
+**Note:** Version bump only for package @vuepress/plugin-watermark
+
+# [2.0.0-rc.73](https://github.com/vuepress/ecosystem/compare/v2.0.0-rc.72...v2.0.0-rc.73) (2025-01-16)
+
+**Note:** Version bump only for package @vuepress/plugin-watermark
+
+# [2.0.0-rc.71](https://github.com/vuepress/ecosystem/compare/v2.0.0-rc.70...v2.0.0-rc.71) (2025-01-15)
+
+**Note:** Version bump only for package @vuepress/plugin-watermark
+
+# [2.0.0-rc.70](https://github.com/vuepress/ecosystem/compare/v2.0.0-rc.69...v2.0.0-rc.70) (2025-01-13)
+
+**Note:** Version bump only for package @vuepress/plugin-watermark
+
+# [2.0.0-rc.69](https://github.com/vuepress/ecosystem/compare/v2.0.0-rc.68...v2.0.0-rc.69) (2025-01-07)
+
+**Note:** Version bump only for package @vuepress/plugin-watermark
+
+# [2.0.0-rc.68](https://github.com/vuepress/ecosystem/compare/v2.0.0-rc.67...v2.0.0-rc.68) (2024-12-27)
+
+**Note:** Version bump only for package @vuepress/plugin-watermark
+
 # [2.0.0-rc.67](https://github.com/vuepress/ecosystem/compare/v2.0.0-rc.66...v2.0.0-rc.67) (2024-12-16)
 
 ### Bug Fixes

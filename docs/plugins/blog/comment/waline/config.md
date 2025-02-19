@@ -58,7 +58,7 @@
 
 - Details:
 
-  Darkmode support
+  Dark mode support
 
   - Setting a boolean will set the dark mode according to its value.
   - Set it to `'auto'` will display darkmode due to device settings.
@@ -265,7 +265,7 @@
 
   ```ts
   interface WalineLocales {
-    [localePath: string]: WalineLocale
+    [localePath: string]: Partial<WalineLocale>
   }
   ```
 

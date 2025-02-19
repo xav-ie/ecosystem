@@ -23,7 +23,7 @@ export const readingTimeLocaleInfo: DefaultLocaleInfo<ReadingTimePluginLocaleDat
       },
     ],
     [
-      ['zh', 'zh-TW', 'zh-Hant'],
+      ['zh-TW', 'zh-Hant'],
       {
         word: '約 $word 字',
         less1Minute: '小於 1 分鐘',
@@ -34,14 +34,6 @@ export const readingTimeLocaleInfo: DefaultLocaleInfo<ReadingTimePluginLocaleDat
       ['de', 'de-DE'],
       {
         word: 'Ungefähr $word Wörter',
-        less1Minute: 'Weniger als eine Minute',
-        time: 'Ungefähr $time min',
-      },
-    ],
-    [
-      ['de-AT'],
-      {
-        word: 'Um die $word Wörter',
         less1Minute: 'Weniger als eine Minute',
         time: 'Ungefähr $time min',
       },

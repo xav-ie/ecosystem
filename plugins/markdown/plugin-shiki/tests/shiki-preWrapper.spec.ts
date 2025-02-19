@@ -8,6 +8,7 @@ import {
 } from '@vuepress/highlighter-helper'
 import MarkdownIt from 'markdown-it'
 import { describe, expect, it } from 'vitest'
+import type { App } from 'vuepress'
 import type { MarkdownItPreWrapperOptions } from '../src/node/markdown/index.js'
 import {
   createMarkdownFilePathGetter,
@@ -18,7 +19,7 @@ import {
 } from '../src/node/markdown/index.js'
 import type { ShikiPluginOptions } from '../src/node/options.js'
 
-const shikiHighlighter = await createShikiHighlighter()
+const { highlighter, loadLang } = await createShikiHighlighter({} as App)
 
 const createMarkdown = ({
   preWrapper = true,
@@ -26,13 +27,15 @@ const createMarkdown = ({
   collapsedLines = false,
   ...options
 }: ShikiPluginOptions = {}): MarkdownIt => {
-  const md = MarkdownIt()
+  const md = new MarkdownIt()
 
   const markdownFilePathGetter = createMarkdownFilePathGetter(md)
 
   md.options.highlight = getHighLightFunction(
-    shikiHighlighter,
+    highlighter,
     options,
+    [],
+    loadLang,
     markdownFilePathGetter,
   )
 

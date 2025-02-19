@@ -1,6 +1,6 @@
 {
   "name": "@vuepress/plugin-slimsearch",
-  "version": "2.0.0-rc.67",
+  "version": "2.0.0-rc.78",
   "description": "VuePress plugin - built-in slimsearch",
   "keywords": [
     "vuepress-plugin",
@@ -40,18 +40,18 @@
     "bundle": "rollup -c rollup.config.ts --configPlugin esbuild",
     "clean": "rimraf --glob ./lib ./*.tsbuildinfo",
     "copy": "cpx \"src/**/*.{d.ts,svg}\" lib",
-    "style": "sass src:lib --embed-sources --style=compressed"
+    "style": "sass src:lib --embed-sources --style=compressed --pkg-importer=node"
   },
   "dependencies": {
     "@vuepress/helper": "workspace:*",
-    "@vueuse/core": "catalog:",
+    "@vueuse/core": "^12.7.0",
     "cheerio": "^1.0.0",
-    "chokidar": "catalog:",
+    "chokidar": "^3.6.0",
     "slimsearch": "^2.2.2",
-    "vue": "catalog:"
+    "vue": "^3.5.13"
   },
   "peerDependencies": {
-    "vuepress": "catalog:"
+    "vuepress": "2.0.0-rc.19"
   },
   "devDependencies": {
     "domhandler": "5.0.3"

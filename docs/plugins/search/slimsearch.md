@@ -1,3 +1,7 @@
+---
+icon: search
+---
+
 # slimsearch
 
 <NpmBadge package="@vuepress/plugin-slimsearch" />
@@ -174,44 +178,9 @@ Customize index fields.
 
 ### hotKeys
 
-- Type: `SearchProHotKeyOptions[]`
+- Type: `(KeyOptions | string)[]`
 
-  ```ts
-  interface SearchProHotKeyOptions {
-    /**
-     * Value of `event.key` to trigger the hot key
-     */
-    key: string
-
-    /**
-     * Whether to press `event.altKey` at the same time
-     *
-     * @default false
-     */
-    alt?: boolean
-
-    /**
-     * Whether to press `event.ctrlKey` at the same time
-     *
-     * @default false
-     */
-    ctrl?: boolean
-
-    /**
-     * Whether to press `event.shiftKey` at the same time
-     *
-     * @default false
-     */
-    shift?: boolean
-
-    /**
-     * Whether to press `event.metaKey` at the same time
-     *
-     * @default false
-     */
-    meta?: boolean
-  }
-  ```
+  @[code ts](@vuepress/helper/src/shared/key.ts)
 
 - Default: `[{ key: "k", ctrl: true }, { key: "/", ctrl: true }]`
 
@@ -402,7 +371,6 @@ Multilingual configuration of the search plugin.
 - **Traditional Chinese** (zh-TW)
 - **English (United States)** (en-US)
 - **German** (de-DE)
-- **German (Australia)** (de-AT)
 - **Russian** (ru-RU)
 - **Ukrainian** (uk-UA)
 - **Vietnamese** (vi-VN)

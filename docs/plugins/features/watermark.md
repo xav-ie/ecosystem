@@ -1,3 +1,7 @@
+---
+icon: droplet
+---
+
 # watermark
 
 <NpmBadge package="@vuepress/plugin-watermark" />
@@ -114,6 +118,7 @@ it may be necessary to control different watermark opacities, font colors,
 etc., in **dark/light mode** , or to pass in callbacks such as `onSuccess`, `extraDrawFunc`, and so on.
 
 ```ts
+import { useDarkMode } from '@vuepress/helper/client'
 import { computed } from 'vue'
 
 export default defineClientConfig({

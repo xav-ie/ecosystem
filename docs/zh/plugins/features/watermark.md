@@ -1,3 +1,7 @@
+---
+icon: droplet
+---
+
 # watermark
 
 <NpmBadge package="@vuepress/plugin-watermark" />
@@ -113,6 +117,7 @@ defineWatermarkConfig({
 或者需要传入如 `onSuccess`、`extraDrawFunc` 等回调函数。
 
 ```ts
+import { useDarkMode } from '@vuepress/helper/client'
 import { computed } from 'vue'
 
 export default defineClientConfig({

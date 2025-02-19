@@ -9,7 +9,7 @@ export const darkModeSymbol: InjectionKey<DarkModeRef> = Symbol(
   __VUEPRESS_DEV__ ? 'darkMode' : '',
 )
 
-const applyDarkmodeToHTML = (isDarkMode: DarkModeRef): void => {
+const applyDarkModeToHTML = (isDarkMode: DarkModeRef): void => {
   const update = (value = isDarkMode.value): void => {
     // set `class="dark"` on `<html>` element
     const el = window.document.documentElement
@@ -72,5 +72,5 @@ export const setupDarkMode = (): void => {
   })
   provide(darkModeSymbol, isDarkMode)
 
-  applyDarkmodeToHTML(isDarkMode)
+  applyDarkModeToHTML(isDarkMode)
 }

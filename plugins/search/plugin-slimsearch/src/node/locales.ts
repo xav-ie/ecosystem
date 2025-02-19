@@ -44,7 +44,7 @@ export const slimsearchLocaleInfo: DefaultLocaleInfo<SlimSearchLocaleData> = [
     },
   ],
   [
-    ['zh', 'zh-TW', 'zh-Hant'],
+    ['zh-TW', 'zh-Hant'],
     {
       cancel: '取消',
       placeholder: '搜索',
@@ -64,25 +64,6 @@ export const slimsearchLocaleInfo: DefaultLocaleInfo<SlimSearchLocaleData> = [
   ],
   [
     ['de', 'de-DE'],
-    {
-      cancel: 'Abbrechen',
-      placeholder: 'Suche',
-      search: 'Suche',
-      searching: 'Suche',
-      defaultTitle: 'Dokumentation',
-      select: 'auswählen',
-      navigate: 'wechseln',
-      autocomplete: 'automatisch vervollständigen',
-      exit: 'schließen',
-      queryHistory: 'Suchverlauf',
-      resultHistory: 'Ergebnisverlauf',
-      emptyHistory: 'Suchverlauf leeren',
-      emptyResult: 'Keine Ergebnisse gefunden',
-      loading: 'Suchindex wird geladen...',
-    },
-  ],
-  [
-    ['de-AT'],
     {
       cancel: 'Abbrechen',
       placeholder: 'Suche',
@@ -351,7 +332,7 @@ export const slimsearchLocaleInfo: DefaultLocaleInfo<SlimSearchLocaleData> = [
     ['id', 'id-ID'],
     {
       cancel: 'Batal',
-      placeholder: 'Cari sesuatu 🔎',
+      placeholder: 'Cari sesuatu',
       search: 'Cari',
       searching: 'Sedang mencari',
       defaultTitle: 'Dokumentasi',

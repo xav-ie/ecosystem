@@ -1,3 +1,7 @@
+---
+icon: search
+---
+
 # slimsearch
 
 <NpmBadge package="@vuepress/plugin-slimsearch" />
@@ -172,44 +176,9 @@ export default defineUserConfig({
 
 ### hotKeys
 
-- 类型: `SearchProHotKeyOptions[]`
+- 类型: `(KeyOptions | string)[]`
 
-  ```ts
-  interface SearchProHotKeyOptions {
-    /**
-     * 热键的 `event.key` 值
-     */
-    key: string
-
-    /**
-     * 是否同时按下 `event.altKey`
-     *
-     * @default false
-     */
-    alt?: boolean
-
-    /**
-     * 是否同时按下 `event.ctrlKey`
-     *
-     * @default false
-     */
-    ctrl?: boolean
-
-    /**
-     * 是否同时按下 `event.shiftKey`
-     *
-     * @default false
-     */
-    shift?: boolean
-
-    /**
-     * 是否同时按下 `event.metaKey`
-     *
-     * @default false
-     */
-    meta?: boolean
-  }
-  ```
+  @[code ts](@vuepress/helper/src/shared/key.ts)
 
 - 默认值: `[{ key: "k", ctrl: true }, { key: "/", ctrl: true }]`
 
@@ -386,7 +355,7 @@ export default defineUserConfig({
   }
 
   interface SlimSearchLocaleConfig {
-    [localePath: string]: SlimSearchLocaleData
+    [localePath: string]: Partial<SlimSearchLocaleData>
   }
   ```
 
@@ -400,7 +369,6 @@ export default defineUserConfig({
 - **繁体中文** (zh-TW)
 - **英文(美国)** (en-US)
 - **德语** (de-DE)
-- **德语(澳大利亚)** (de-AT)
 - **俄语** (ru-RU)
 - **乌克兰语** (uk-UA)
 - **越南语** (vi-VN)

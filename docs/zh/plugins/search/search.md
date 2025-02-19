@@ -1,3 +1,7 @@
+---
+icon: search
+---
+
 # search
 
 <NpmBadge package="@vuepress/plugin-search" />
@@ -32,13 +36,11 @@ export default {
 
 ### locales
 
-- 类型： `Record<string, { placeholder: string }>`
+- 类型： `Record<string, { placeholder?: string }>`
 
 - 详情：
 
   搜索框在不同 locales 下的文字。
-
-  如果没有指定该配置项，它会降级使用默认文字。
 
 - 示例：
 
@@ -64,9 +66,9 @@ export default {
 
 ### hotKeys
 
-- 类型： `(string | HotKeyOptions)[]`
+- 类型： `(string | KeyOptions)[]`
 
-@[code ts](@vuepress/plugin-search/src/shared/hotKey.ts)
+  @[code ts](@vuepress/helper/src/shared/key.ts)
 
 - 默认值： `['s', '/']`
 

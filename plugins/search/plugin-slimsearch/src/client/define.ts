@@ -1,7 +1,7 @@
+import type { ExactLocaleConfig, KeyOptions } from '@vuepress/helper/client'
 import type {
   SlimSearchCustomFieldFormatter,
-  SlimSearchKeyOptions,
-  SlimSearchLocaleConfig,
+  SlimSearchLocaleData,
 } from '../shared/index.js'
 
 type SlimSearchClientCustomFiledConfig = Record<
@@ -15,12 +15,11 @@ declare const __SLIMSEARCH_OPTIONS__: {
   suggestDelay: number
   queryHistoryCount: number
   resultHistoryCount: number
-  hotKeys: SlimSearchKeyOptions[]
+  hotKeys: KeyOptions[]
   worker: string
 }
-declare const __SLIMSEARCH_LOCALES__: SlimSearchLocaleConfig
+declare const __SLIMSEARCH_LOCALES__: ExactLocaleConfig<SlimSearchLocaleData>
 
 export const customFieldConfig = __SLIMSEARCH_CUSTOM_FIELDS__
 export const options = __SLIMSEARCH_OPTIONS__
-export const hotKeysConfig = options.hotKeys
 export const locales = __SLIMSEARCH_LOCALES__

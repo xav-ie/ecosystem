@@ -1,3 +1,7 @@
+---
+icon: settings-2
+---
+
 # Config
 
 ## Options
@@ -243,7 +247,7 @@ Special settings for better supporting Safari, ignoring these options are safe.
   }
 
   interface PwaPluginLocaleConfig {
-    [localePath: string]: PwaPluginLocaleData
+    [localePath: string]: Partial<PwaPluginLocaleData>
   }
   ```
 
@@ -256,7 +260,6 @@ Special settings for better supporting Safari, ignoring these options are safe.
 - **Traditional Chinese** (zh-TW)
 - **English (United States)** (en-US)
 - **German** (de-DE)
-- **German (Australia)** (de-AT)
 - **Russian** (ru-RU)
 - **Ukrainian** (uk-UA)
 - **Vietnamese** (vi-VN)

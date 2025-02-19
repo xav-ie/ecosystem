@@ -40,7 +40,7 @@ export const pwaLocaleInfo: DefaultLocaleInfo<PwaPluginLocaleData> = [
     },
   ],
   [
-    ['zh', 'zh-TW', 'zh-Hant'],
+    ['zh-TW', 'zh-Hant'],
     {
       install: '安裝',
       iOSInstall: '點擊分享按鈕然後點擊“添加到主畫面”',
@@ -70,23 +70,6 @@ export const pwaLocaleInfo: DefaultLocaleInfo<PwaPluginLocaleData> = [
       explain:
         'Diese App kann auf Ihrem PC oder Mobilgerät installiert werden. Dadurch sieht diese Web-App aus und verhält sich wie jede andere installierte App. Sie finden sie in Ihren App-Listen und können sie an den Startbildschirm, die Startmenüs oder die Taskleisten anheften. Diese installierte Web-App kann auch sicher mit anderen Apps und Ihrem Betriebssystem interagieren.',
       hint: 'Neuer Inhalt gefunden.',
-      update: 'Neue Inhalte sind verfügbar.',
-    },
-  ],
-  [
-    ['de-AT'],
-    {
-      install: 'Installieren',
-      iOSInstall: "Drucke den Share-Button und dan 'zu Homescreen hinzufügen'",
-      cancel: 'Abbrechen',
-      close: 'Schließen',
-      prevImage: 'Vorheriges Bild',
-      nextImage: 'Nächstes Bild',
-      desc: 'Berschreibung',
-      feature: 'Features',
-      explain:
-        'Diese App kann auf Ihrem PC oder Mobilgerät installiert werden.  Dadurch sieht diese Web-App aus und verhält sich wie jede andere installierte App.  Sie finden sie in Ihren App-Listen und können sie an den Startbildschirm, die Startmenüs oder die Taskleisten anheften.  Diese installierte Web-App kann auch sicher mit anderen Apps und Ihrem Betriebssystem interagieren.',
-      hint: 'Neue Inhalte sind verfügbar.',
       update: 'Neue Inhalte sind verfügbar.',
     },
   ],

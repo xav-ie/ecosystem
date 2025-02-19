@@ -29,7 +29,7 @@ export const photoSwipeLocaleInfo: DefaultLocaleInfo<PhotoSwipePluginLocaleData>
       },
     ],
     [
-      ['zh', 'zh-TW', 'zh-Hant'],
+      ['zh-TW', 'zh-Hant'],
       {
         close: '關閉',
         download: '下載圖片',
@@ -45,17 +45,6 @@ export const photoSwipeLocaleInfo: DefaultLocaleInfo<PhotoSwipePluginLocaleData>
         close: 'Schließen',
         download: 'Download',
         fullscreen: 'Vollbild aktivieren',
-        zoom: 'Rein / rauszoomen',
-        arrowPrev: 'Zurück (Pfeil links)',
-        arrowNext: 'Weiter (Pfeil rechts)',
-      },
-    ],
-    [
-      ['de-AT'],
-      {
-        close: 'Schließen',
-        download: 'Download',
-        fullscreen: 'Toggle fullscreen',
         zoom: 'Rein / rauszoomen',
         arrowPrev: 'Zurück (Pfeil links)',
         arrowNext: 'Weiter (Pfeil rechts)',

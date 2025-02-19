@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import VPAutoLink from '@theme/VPAutoLink.vue'
 import VPNavbarDropdown from '@theme/VPNavbarDropdown.vue'
 import { useNavbarConfig } from '@theme/useNavbarConfig'
 import { useNavbarRepo } from '@theme/useNavbarRepo'
@@ -6,7 +7,6 @@ import { useNavbarSelectLanguage } from '@theme/useNavbarSelectLanguage'
 import { useThemeLocaleData } from '@theme/useThemeData'
 import { DeviceType, useUpdateDeviceStatus } from '@theme/useUpdateDeviceStatus'
 import { computed, ref } from 'vue'
-import { AutoLink } from 'vuepress/client'
 
 const navbarConfig = useNavbarConfig()
 const navbarSelectLanguage = useNavbarSelectLanguage()
@@ -34,7 +34,6 @@ useUpdateDeviceStatus(
 )
 </script>
 
-<!-- eslint-disable-next-line vue/no-root-v-if -->
 <template>
   <nav
     v-if="navbarLinks.length"
@@ -47,7 +46,7 @@ useUpdateDeviceStatus(
         :class="{ mobile: isMobile }"
         :config="item"
       />
-      <AutoLink v-else :config="item" />
+      <VPAutoLink v-else :config="item" />
     </div>
   </nav>
 </template>
@@ -62,13 +61,12 @@ useUpdateDeviceStatus(
     display: none;
   }
 
-  a {
-    display: inline-block;
+  .auto-link {
     color: inherit;
     line-height: 1.4rem;
 
     &:hover,
-    &.route-link-active {
+    &.auto-link-active {
       color: var(--vp-c-text);
     }
   }
@@ -88,16 +86,18 @@ useUpdateDeviceStatus(
     margin-left: 0;
   }
 
-  a {
+  .auto-link {
     &:hover,
-    &.route-link-active {
+    &.auto-link-active {
       color: var(--vp-c-accent);
     }
   }
 
-  > a {
+  > .auto-link {
+    display: inline-block;
+
     &:hover,
-    &.route-link-active {
+    &.auto-link-active {
       margin-bottom: -2px;
       border-bottom: 2px solid var(--vp-c-accent);
 
