@@ -16,7 +16,7 @@ import {
 } from './markdown-it-plugins/index.js'
 import type { MarkdownChartPluginOptions } from './options.js'
 import { prepareConfigFile } from './prepareConfigFile.js'
-import { PLUGIN_NAME, getInstallStatus, logger } from './utils.js'
+import { PLUGIN_NAME, isInstalled, logger } from './utils.js'
 
 export const markdownChartPlugin =
   (options: MarkdownChartPluginOptions = {}): Plugin =>
@@ -29,7 +29,7 @@ export const markdownChartPlugin =
     ): boolean => {
       const enabled = Boolean(options[key])
       const pkgInstalled = pkgs.every((pkg) =>
-        getInstallStatus(pkg, Boolean(options[key])),
+        isInstalled(pkg, Boolean(options[key])),
       )
 
       return enabled && pkgInstalled

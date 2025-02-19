@@ -7,7 +7,7 @@ const markmapRender = (tokens: Token[], index: number): string => {
   const key = `markmap-${index}`
   const { content } = token
 
-  return `<MarkMap id="${key}" data="${encodeData(content)}"></MarkMap>`
+  return `<MarkMap id="${key}" content="${encodeData(content)}"></MarkMap>`
 }
 
 export const markmap: PluginSimple = (md) => {

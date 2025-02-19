@@ -1,8 +1,4 @@
-import {
-  Logger,
-  getInstalledStatus as _getInstalledStatus,
-  ensureEndingSlash,
-} from '@vuepress/helper'
+import { Logger, ensureEndingSlash, isModuleAvailable } from '@vuepress/helper'
 import { getDirname, path } from 'vuepress/utils'
 
 const __dirname = getDirname(import.meta.url)
@@ -15,11 +11,11 @@ export const CLIENT_FOLDER = ensureEndingSlash(
   path.resolve(__dirname, '../client'),
 )
 
-export const getInstallStatus = (pkg: string, hint = true): boolean => {
-  const isInstalled = _getInstalledStatus(pkg, import.meta.url)
+export const isInstalled = (pkg: string, hint = true): boolean => {
+  const status = isModuleAvailable(pkg, import.meta)
 
-  if (hint && !isInstalled)
+  if (hint && !status)
     logger.error(`Package ${pkg} is not installed, please install it manually!`)
 
-  return isInstalled
+  return status
 }

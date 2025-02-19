@@ -1,4 +1,4 @@
-import { LoadingIcon, decodeData } from '@vuepress/helper/client'
+import { LoadingIcon, decodeData, wait } from '@vuepress/helper/client'
 import { useDebounceFn, useEventListener } from '@vueuse/core'
 import type { Markmap } from 'markmap-view'
 import type { VNode } from 'vue'
@@ -24,14 +24,20 @@ export default defineComponent({
      *
      * 图表 id
      */
-    id: { type: String, required: true },
+    id: {
+      type: String,
+      required: true,
+    },
 
     /**
-     * Markmap data
+     * Markmap content
      *
-     * Markmap 数据
+     * Markmap
      */
-    data: { type: String, required: true },
+    content: {
+      type: String,
+      required: true,
+    },
   },
 
   setup(props) {
@@ -53,17 +59,13 @@ export default defineComponent({
         import(/* webpackChunkName: "markmap" */ 'markmap-lib'),
         import(/* webpackChunkName: "markmap" */ 'markmap-view'),
         import(/* webpackChunkName: "markmap" */ 'markmap-toolbar'),
-        // Delay
-        new Promise<void>((resolve) => {
-          setTimeout(resolve, __MC_DELAY__)
-        }),
+        wait(__MC_DELAY__),
       ]).then(
         async ([{ Transformer, builtInPlugins }, markmapView, { Toolbar }]) => {
           const { Markmap, deriveOptions, loadCSS, loadJS } = markmapView
-
           const transformer = new Transformer(builtInPlugins)
           const { features, frontmatter, root } = transformer.transform(
-            decodeData(props.data),
+            decodeData(props.content),
           )
           const { styles, scripts } = transformer.getUsedAssets(features)
 
@@ -76,19 +78,18 @@ export default defineComponent({
               maxWidth: 240,
               ...frontmatter?.markmap,
             }),
-            root,
           )
 
-          await markmap.fit()
-
           const { el } = Toolbar.create(markmap)
+
+          await markmap.setData(root)
+          await markmap.fit()
 
           el.style.position = 'absolute'
           el.style.bottom = '0.5rem'
           el.style.right = '0.5rem'
 
           markupWrapper.value!.append(el)
-
           loading.value = false
         },
       )
@@ -96,6 +97,7 @@ export default defineComponent({
 
     onUnmounted(() => {
       markmap?.destroy()
+      markmap = null
     })
 
     return (): VNode =>

@@ -16,11 +16,7 @@ export const prepareConfigFile = async (
 
   if (status.echarts) {
     imports.add(`import ECharts from "${CLIENT_FOLDER}components/ECharts.js";`)
-    imports.add(
-      `import { injectEChartsConfig } from "${CLIENT_FOLDER}/index.js";`,
-    )
     enhances.add(`app.component("ECharts", ECharts);`)
-    enhances.add(`injectEChartsConfig(app);`)
   }
 
   if (status.flowchart) {
@@ -38,10 +34,6 @@ export const prepareConfigFile = async (
 
   if (status.mermaid) {
     imports.add(`import Mermaid from "${CLIENT_FOLDER}components/Mermaid.js";`)
-    imports.add(
-      `import { injectMermaidConfig } from "${CLIENT_FOLDER}index.js";`,
-    )
-    enhances.add(`injectMermaidConfig(app);`)
     enhances.add(`app.component("Mermaid", Mermaid);`)
   }
 

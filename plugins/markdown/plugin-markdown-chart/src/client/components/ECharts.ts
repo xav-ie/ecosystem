@@ -27,12 +27,12 @@ const AsyncFunction = (async (): Promise<void> => {}).constructor
 const parseEChartsConfig = (
   config: string,
   type: 'js' | 'json',
-  echarts: EChartsType,
+  myChart: EChartsType,
 ): Promise<EChartsConfig> => {
   if (type === 'js') {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const runner = AsyncFunction(
-      'echarts',
+      'myChart',
       `\
 let width,height,option,__echarts_config__;
 {
@@ -41,9 +41,10 @@ __echarts_config__={width,height,option};
 }
 return __echarts_config__;
 `,
-    ) as (echarts: EChartsType) => Promise<EChartsConfig>
+    )
 
-    return runner(echarts)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    return runner(myChart) as Promise<EChartsConfig>
   }
 
   return Promise.resolve({ option: JSON.parse(config) as EChartsOption })
@@ -58,28 +59,37 @@ export default defineComponent({
      *
      * 图表配置
      */
-    config: { type: String, required: true },
+    config: {
+      type: String,
+      required: true,
+    },
 
     /**
      * Chart id
      *
      * 图表 id
      */
-    id: { type: String, required: true },
+    id: {
+      type: String,
+      required: true,
+    },
 
     /**
      * Chart title
      *
      * 图表标题
      */
-    title: { type: String, default: '' },
+    title: String,
 
     /**
      * Chart config type
      *
      * 图表配置类型
      */
-    type: { type: String as PropType<'js' | 'json'>, default: 'json' },
+    type: {
+      type: String as PropType<'js' | 'json'>,
+      default: 'json',
+    },
   },
 
   setup(props) {
@@ -88,39 +98,40 @@ export default defineComponent({
     const loading = ref(true)
     const echartsContainer = shallowRef<HTMLElement>()
 
-    let chart: EChartsType | null = null
+    let instance: EChartsType | null = null
 
     useEventListener(
       'resize',
       useDebounceFn(() => {
-        chart?.resize()
+        instance?.resize()
       }, 100),
     )
 
     onMounted(() => {
       void Promise.all([
         import(/* webpackChunkName: "echarts" */ 'echarts'),
+        // Delay
         wait(__MC_DELAY__),
       ]).then(async ([echarts]) => {
         await echartsConfig.setup?.()
 
-        chart = echarts.init(echartsContainer.value)
+        instance = echarts.init(echartsContainer.value)
 
         const { option, ...size } = await parseEChartsConfig(
           decodeData(props.config),
           props.type,
-          chart,
+          instance,
         )
 
-        chart.resize(size)
-        chart.setOption({ ...echartsConfig.option, ...option })
+        instance.resize(size)
+        instance.setOption({ ...echartsConfig.option, ...option })
 
         loading.value = false
       })
     })
 
     onUnmounted(() => {
-      chart?.dispose()
+      instance?.dispose()
     })
 
     return (): (VNode | null)[] => [

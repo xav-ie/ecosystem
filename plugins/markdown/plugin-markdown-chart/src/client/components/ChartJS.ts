@@ -1,12 +1,21 @@
 import {
   LoadingIcon,
   decodeData,
-  useDarkmode,
+  useDarkMode,
   wait,
 } from '@vuepress/helper/client'
+import { watchImmediate } from '@vueuse/core'
 import type { Chart, ChartConfiguration } from 'chart.js'
 import type { PropType, VNode } from 'vue'
-import { computed, defineComponent, h, ref, shallowRef, watch } from 'vue'
+import {
+  computed,
+  defineComponent,
+  h,
+  onMounted,
+  onUnmounted,
+  ref,
+  shallowRef,
+} from 'vue'
 
 import '../styles/chartjs.css'
 
@@ -62,10 +71,7 @@ export default defineComponent({
      *
      * 图表标题
      */
-    title: {
-      type: String,
-      default: '',
-    },
+    title: String,
 
     /**
      * Chart config type
@@ -79,8 +85,7 @@ export default defineComponent({
   },
 
   setup(props) {
-    const isDarkmode = useDarkmode()
-
+    const isDarkMode = useDarkMode()
     const chartElement = shallowRef<HTMLElement>()
     const chartCanvasElement = shallowRef<HTMLCanvasElement>()
 
@@ -90,30 +95,38 @@ export default defineComponent({
 
     let loaded = false
 
-    let chart: Chart | null
+    let chartjs: Chart | null
 
-    const renderChart = async (darkmode: boolean): Promise<void> => {
-      const [{ default: Chart }] = await Promise.all([
-        import(/* webpackChunkName: "chartjs" */ 'chart.js/auto'),
-        loaded ? Promise.resolve() : wait(__MC_DELAY__),
+    const renderChart = async (): Promise<void> => {
+      const [{ default: ChartJs }] = await Promise.all([
+        import(/* webpackChunkName: "chart" */ 'chart.js/auto'),
+        loaded ? Promise.resolve() : ((loaded = true), wait(__MC_DELAY__)),
       ])
 
-      loaded = true
-
-      Chart.defaults.borderColor = darkmode ? '#ccc' : '#36A2EB'
-      Chart.defaults.color = darkmode ? '#fff' : '#000'
-      Chart.defaults.maintainAspectRatio = false
+      ChartJs.defaults.borderColor = isDarkMode.value ? '#ccc' : '#36A2EB'
+      ChartJs.defaults.color = isDarkMode.value ? '#fff' : '#000'
+      ChartJs.defaults.maintainAspectRatio = false
 
       const data = parseChartConfig(config.value, props.type)
+
       const ctx = chartCanvasElement.value!.getContext('2d')!
 
-      chart?.destroy()
-      chart = new Chart(ctx, data)
+      chartjs?.destroy()
+      chartjs = new ChartJs(ctx, data)
 
       loading.value = false
     }
 
-    watch(isDarkmode, (value) => renderChart(value), { immediate: true })
+    onMounted(() => {
+      watchImmediate(isDarkMode, () => renderChart(), {
+        flush: 'post',
+      })
+    })
+
+    onUnmounted(() => {
+      chartjs?.destroy()
+      chartjs = null
+    })
 
     return (): (VNode | null)[] => [
       props.title

@@ -8,7 +8,7 @@ export const chartjs: PluginSimple = (md) => {
     openRender: (tokens, index) => {
       const title = tokens[index].info
         .trimStart()
-        // "chart" length
+        // "chartjs" length
         .slice(7)
         .trim()
 

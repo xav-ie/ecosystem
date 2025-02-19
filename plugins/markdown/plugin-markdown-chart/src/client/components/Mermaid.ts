@@ -2,18 +2,12 @@ import {
   LoadingIcon,
   decodeData,
   isFunction,
-  useDarkmode,
+  useDarkMode,
+  wait,
 } from '@vuepress/helper/client'
+import { watchImmediate } from '@vueuse/core'
 import type { VNode } from 'vue'
-import {
-  computed,
-  defineComponent,
-  h,
-  onMounted,
-  ref,
-  shallowRef,
-  watch,
-} from 'vue'
+import { computed, defineComponent, h, onMounted, ref, shallowRef } from 'vue'
 
 import { useMermaidOptions } from '../helpers/index.js'
 import type { MermaidThemeVariables } from '../typings/index.js'
@@ -24,40 +18,40 @@ declare const __MC_DELAY__: number
 
 const DEFAULT_CHART_OPTIONS = { useMaxWidth: false }
 
-const getThemeVariables = (isDarkmode: boolean): MermaidThemeVariables => ({
-  dark: isDarkmode,
-  background: isDarkmode ? '#1e1e1e' : '#fff',
+const getThemeVariables = (isDarkMode: boolean): MermaidThemeVariables => ({
+  dark: isDarkMode,
+  background: isDarkMode ? '#1e1e1e' : '#fff',
 
-  primaryColor: isDarkmode ? '#389d70' : '#4abf8a',
-  primaryBorderColor: isDarkmode ? '#389d70' : '#4abf8a',
-  primaryTextColor: isDarkmode ? '#fff' : '#000',
+  primaryColor: isDarkMode ? '#389d70' : '#4abf8a',
+  primaryBorderColor: isDarkMode ? '#389d70' : '#4abf8a',
+  primaryTextColor: isDarkMode ? '#fff' : '#000',
 
   secondaryColor: '#ffb500',
-  secondaryBorderColor: isDarkmode ? '#fff' : '#000',
-  secondaryTextColor: isDarkmode ? '#ddd' : '#333',
+  secondaryBorderColor: isDarkMode ? '#fff' : '#000',
+  secondaryTextColor: isDarkMode ? '#ddd' : '#333',
 
-  tertiaryColor: isDarkmode ? '#282828' : '#efeef4',
-  tertiaryBorderColor: isDarkmode ? '#bbb' : '#242424',
-  tertiaryTextColor: isDarkmode ? '#ddd' : '#333',
+  tertiaryColor: isDarkMode ? '#282828' : '#efeef4',
+  tertiaryBorderColor: isDarkMode ? '#bbb' : '#242424',
+  tertiaryTextColor: isDarkMode ? '#ddd' : '#333',
 
   // Note
-  noteBkgColor: isDarkmode ? '#f6d365' : '#fff5ad',
+  noteBkgColor: isDarkMode ? '#f6d365' : '#fff5ad',
   noteTextColor: '#242424',
-  noteBorderColor: isDarkmode ? '#f6d365' : '#333',
+  noteBorderColor: isDarkMode ? '#f6d365' : '#333',
 
-  lineColor: isDarkmode ? '#d3d3d3' : '#333',
-  textColor: isDarkmode ? '#fff' : '#242424',
+  lineColor: isDarkMode ? '#d3d3d3' : '#333',
+  textColor: isDarkMode ? '#fff' : '#242424',
 
-  mainBkg: isDarkmode ? '#389d70' : '#4abf8a',
+  mainBkg: isDarkMode ? '#389d70' : '#4abf8a',
   errorBkgColor: '#eb4d5d',
   errorTextColor: '#fff',
 
   // Flowchart
-  nodeBorder: isDarkmode ? '#389d70' : '#4abf8a',
-  nodeTextColor: isDarkmode ? '#fff' : '#242424',
+  nodeBorder: isDarkMode ? '#389d70' : '#4abf8a',
+  nodeTextColor: isDarkMode ? '#fff' : '#242424',
 
   // Sequence
-  signalTextColor: isDarkmode ? '#9e9e9e' : '#242424',
+  signalTextColor: isDarkMode ? '#9e9e9e' : '#242424',
 
   // Class
   classText: '#fff',
@@ -65,11 +59,11 @@ const getThemeVariables = (isDarkmode: boolean): MermaidThemeVariables => ({
   // State
   labelColor: '#fff',
 
-  attributeBackgroundColorEven: isDarkmode ? '#0d1117' : '#fff',
-  attributeBackgroundColorOdd: isDarkmode ? '#161b22' : '#f8f8f8',
+  attributeBackgroundColorEven: isDarkMode ? '#0d1117' : '#fff',
+  attributeBackgroundColorOdd: isDarkMode ? '#161b22' : '#f8f8f8',
 
   // Colors
-  fillType0: isDarkmode ? '#cf1322' : '#f1636e',
+  fillType0: isDarkMode ? '#cf1322' : '#f1636e',
   fillType1: '#f39c12',
   fillType2: '#2ecc71',
   fillType3: '#fa541c',
@@ -86,25 +80,31 @@ export default defineComponent({
     /**
      * Mermaid id
      */
-    id: { type: String, required: true },
+    id: {
+      type: String,
+      required: true,
+    },
 
     /**
      * Mermaid config
      *
      * Mermaid 配置
      */
-    code: { type: String, required: true },
+    code: {
+      type: String,
+      required: true,
+    },
 
     /**
      * Mermaid title
      *
      * Mermaid 标题
      */
-    title: { type: String, default: '' },
+    title: String,
   },
 
   setup(props) {
-    const isDarkmode = useDarkmode()
+    const isDarkMode = useDarkMode()
     const { themeVariables, ...mermaidOptions } = useMermaidOptions()
     const mermaidElement = shallowRef<HTMLElement>()
 
@@ -118,20 +118,15 @@ export default defineComponent({
         import(
           /* webpackChunkName: "mermaid" */ 'mermaid/dist/mermaid.esm.min.mjs'
         ),
-        loaded
-          ? Promise.resolve()
-          : ((loaded = true),
-            new Promise<void>((resolve) => {
-              setTimeout(resolve, __MC_DELAY__)
-            })),
+        loaded ? Promise.resolve() : ((loaded = true), wait(__MC_DELAY__)),
       ])
 
       mermaid.initialize({
         theme: 'base',
         themeVariables: {
-          ...getThemeVariables(isDarkmode.value),
+          ...getThemeVariables(isDarkMode.value),
           ...(isFunction(themeVariables)
-            ? themeVariables(isDarkmode.value)
+            ? themeVariables(isDarkMode.value)
             : themeVariables),
         },
         flowchart: DEFAULT_CHART_OPTIONS,
@@ -184,10 +179,10 @@ export default defineComponent({
       a.click()
     }
 
-    watch(isDarkmode, () => renderMermaid())
-
     onMounted(() => {
-      void renderMermaid()
+      watchImmediate(isDarkMode, () => renderMermaid(), {
+        flush: 'post',
+      })
     })
 
     return (): VNode[] => [
