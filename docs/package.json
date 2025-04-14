@@ -29,6 +29,7 @@
     "@vuepress/plugin-markdown-math": "workspace:*",
     "@vuepress/plugin-markdown-stylize": "workspace:*",
     "@vuepress/plugin-markdown-tab": "workspace:*",
+    "@vuepress/plugin-media": "workspace:*",
     "@vuepress/plugin-medium-zoom": "workspace:*",
     "@vuepress/plugin-nprogress": "workspace:*",
     "@vuepress/plugin-photo-swipe": "workspace:*",

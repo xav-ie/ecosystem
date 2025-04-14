@@ -9,6 +9,7 @@ import { markdownImagePlugin } from '@vuepress/plugin-markdown-image'
 import { markdownIncludePlugin } from '@vuepress/plugin-markdown-include'
 import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
 import { markdownStylizePlugin } from '@vuepress/plugin-markdown-stylize'
+import { mediaPlugin } from '@vuepress/plugin-media'
 import { redirectPlugin } from '@vuepress/plugin-redirect'
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
 import { revealJsPlugin } from '@vuepress/plugin-revealjs'
@@ -80,6 +81,11 @@ export const plugins = [
         },
       },
     ],
+  }),
+  mediaPlugin({
+    artalk: true,
+    bilibili: true,
+    vidstack: true,
   }),
   redirectPlugin({
     switchLocale: 'modal',
