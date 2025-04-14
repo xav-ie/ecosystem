@@ -31,32 +31,49 @@ export const getHighLightFunction = (
 ): MarkdownItHighlight => {
   const transformers = getTransformers(options)
 
-  return (content, language, attrs) =>
-    handleMustache(content, (str) =>
-      highlighter.codeToHtml(str, {
-        lang: getLanguage(language, options, loadLang, markdownFilePathGetter),
-        meta: {
-          /**
-           * Custom `transformers` passed by users may require `attrs`.
-           * e.g. [transformerNotationWordHighlight](https://shiki.style/packages/transformers#transformernotationwordhighlight)
-           */
-          __raw: attrs,
-        },
-        transformers: [
-          ...transformers,
-          ...((options.highlightLines ?? true)
-            ? [transformerCompactLineOptions(attrsToLines(attrs))]
-            : []),
-          ...whitespaceTransformer(attrs, options.whitespace),
-          ...(extraTransformers ?? []),
-          ...(options.transformers ?? []),
-        ],
-        ...('themes' in options
-          ? {
-              themes: options.themes,
-              defaultColor: false,
-            }
-          : { theme: options.theme ?? 'nord' }),
-      }),
-    )
+  return (content, language, attrs) => {
+    try {
+      return handleMustache(content, (str) =>
+        highlighter.codeToHtml(str, {
+          lang: getLanguage(
+            language,
+            options,
+            loadLang,
+            markdownFilePathGetter,
+          ),
+          meta: {
+            /**
+             * Custom `transformers` passed by users may require `attrs`.
+             * e.g. [transformerNotationWordHighlight](https://shiki.style/packages/transformers#transformernotationwordhighlight)
+             */
+            __raw: attrs,
+          },
+          transformers: [
+            ...transformers,
+            ...((options.highlightLines ?? true)
+              ? [transformerCompactLineOptions(attrsToLines(attrs))]
+              : []),
+            ...whitespaceTransformer(attrs, options.whitespace),
+            ...(extraTransformers ?? []),
+            ...(options.transformers ?? []),
+          ],
+          ...('themes' in options
+            ? {
+                themes: options.themes,
+                defaultColor: false,
+              }
+            : { theme: options.theme ?? 'nord' }),
+        }),
+      )
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(
+        `Error when highlighting code with shiki:\n`,
+        error,
+        `\n\n${content}`,
+      )
+
+      return content
+    }
+  }
 }

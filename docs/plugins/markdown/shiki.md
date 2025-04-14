@@ -764,6 +764,17 @@ body > div {
   console.log(a + b)
   ```
 
+  ```ts twoslash title=".vuepress/script/config.ts" /defineUserConfig/
+  import { shikiPlugin } from '@vuepress/plugin-shiki'
+  import { defineUserConfig } from 'vuepress'
+
+  export default defineUserConfig({
+    // Set language you are using
+    lang: 'en-US',
+    plugins: [shikiPlugin()],
+  })
+  ```
+
   ::: warning
 
   For code blocks that have `twoslash` enabled:
