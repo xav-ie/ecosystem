@@ -34,6 +34,11 @@ catalogs:
 overrides:
   esbuild: ^0.25.2
 
+patchedDependencies:
+  '@lerna-lite/core':
+    hash: 512dd3461372971b6c5b458dfab894790d3e4de9426935ac02497807959ba25f
+    path: patches/@lerna-lite__core.patch
+
 importers:
 
   .:
@@ -10256,7 +10261,7 @@ snapshots:
 
   '@lerna-lite/cli@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.15.3)(typescript@5.8.3)':
     dependencies:
-      '@lerna-lite/core': 4.0.0(@types/node@22.15.3)(typescript@5.8.3)
+      '@lerna-lite/core': 4.0.0(patch_hash=512dd3461372971b6c5b458dfab894790d3e4de9426935ac02497807959ba25f)(@types/node@22.15.3)(typescript@5.8.3)
       '@lerna-lite/init': 4.0.0(@types/node@22.15.3)(typescript@5.8.3)
       '@lerna-lite/npmlog': 4.0.0
       dedent: 1.5.3
@@ -10273,7 +10278,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@lerna-lite/core@4.0.0(@types/node@22.15.3)(typescript@5.8.3)':
+  '@lerna-lite/core@4.0.0(patch_hash=512dd3461372971b6c5b458dfab894790d3e4de9426935ac02497807959ba25f)(@types/node@22.15.3)(typescript@5.8.3)':
     dependencies:
       '@inquirer/expand': 4.0.12(@types/node@22.15.3)
       '@inquirer/input': 4.1.9(@types/node@22.15.3)
@@ -10313,7 +10318,7 @@ snapshots:
 
   '@lerna-lite/init@4.0.0(@types/node@22.15.3)(typescript@5.8.3)':
     dependencies:
-      '@lerna-lite/core': 4.0.0(@types/node@22.15.3)(typescript@5.8.3)
+      '@lerna-lite/core': 4.0.0(patch_hash=512dd3461372971b6c5b458dfab894790d3e4de9426935ac02497807959ba25f)(@types/node@22.15.3)(typescript@5.8.3)
       fs-extra: 11.3.0
       p-map: 7.0.3
       write-json-file: 6.0.0
@@ -10337,7 +10342,7 @@ snapshots:
   '@lerna-lite/publish@4.0.0(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3)':
     dependencies:
       '@lerna-lite/cli': 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.15.3)(typescript@5.8.3)
-      '@lerna-lite/core': 4.0.0(@types/node@22.15.3)(typescript@5.8.3)
+      '@lerna-lite/core': 4.0.0(patch_hash=512dd3461372971b6c5b458dfab894790d3e4de9426935ac02497807959ba25f)(@types/node@22.15.3)(typescript@5.8.3)
       '@lerna-lite/npmlog': 4.0.0
       '@lerna-lite/version': 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3)
       '@npmcli/arborist': 9.0.2
@@ -10376,7 +10381,7 @@ snapshots:
   '@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3)':
     dependencies:
       '@lerna-lite/cli': 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.15.3)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.15.3)(typescript@5.8.3)
-      '@lerna-lite/core': 4.0.0(@types/node@22.15.3)(typescript@5.8.3)
+      '@lerna-lite/core': 4.0.0(patch_hash=512dd3461372971b6c5b458dfab894790d3e4de9426935ac02497807959ba25f)(@types/node@22.15.3)(typescript@5.8.3)
       '@lerna-lite/npmlog': 4.0.0
       '@octokit/plugin-enterprise-rest': 6.0.1
       '@octokit/rest': 21.1.1
